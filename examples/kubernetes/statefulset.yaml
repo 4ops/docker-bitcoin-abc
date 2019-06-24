@@ -39,7 +39,7 @@ spec:
             secretKeyRef:
               name: bitcoin-abc-testnet
               key: RPCPASSWORD
-        image: 4ops/bitcoin-abc:v0.19.6
+        image: 4ops/bitcoin-abc:v0.19.7
         livenessProbe:
           tcpSocket:
             port: 18333
