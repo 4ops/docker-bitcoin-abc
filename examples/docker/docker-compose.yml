@@ -20,7 +20,7 @@ services:
     restart: always
 
   mainnet:
-    image: 4ops/bitcoin-abc:v0.19.11
+    image: 4ops/bitcoin-abc:v0.19.12
     volumes:
     - ./mainnet-data:/home/bitcoin/.bitcoin
     ports:
