@@ -1,4 +1,4 @@
-FROM 4ops/alpine-glibc:3.9 AS build
+FROM 4ops/alpine-glibc:3.10 AS build
 
 ARG BITCOIN_VERSION
 ARG BITCOIN_CHECKSUM
@@ -18,7 +18,7 @@ RUN mv "bitcoin-abc-${BITCOIN_VERSION}/bin/bitcoin-tx" /install/bin
 
 COPY docker-entrypoint.sh /install/entrypoint.sh
 
-FROM 4ops/alpine-glibc:3.9 AS release
+FROM 4ops/alpine-glibc:3.10 AS release
 
 ENV BITCOIN_DATA=/home/bitcoin/.bitcoin
 
