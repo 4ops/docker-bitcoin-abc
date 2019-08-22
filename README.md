@@ -12,7 +12,7 @@ For initital synchronization:
 
 * 2 CPU cores
 * 4 GB RAM
-* 35 GB of disk space
+* 40 GB of disk space
 
 When synchronized:
 
