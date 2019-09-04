@@ -21,54 +21,54 @@ spec:
         blockchain: testnet
     spec:
       containers:
-      - args:
-        - "-printtoconsole"
-        - "-rpcuser=$(RPCUSER)"
-        - "-rpcpassword=$(RPCPASSWORD)"
-        - "-rpcallowip=10.0.0.0/8"
-        - "-txindex"
-        - "-testnet"
-        env:
-        - name: RPCUSER
-          valueFrom:
-            secretKeyRef:
-              name: bitcoin-abc-testnet
-              key: RPCUSER
-        - name: RPCPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: bitcoin-abc-testnet
-              key: RPCPASSWORD
-        image: 4ops/bitcoin-abc:v0.20.0
-        livenessProbe:
-          tcpSocket:
-            port: 18333
-          timeoutSeconds: 1
-        name: bitcoin-abc
-        ports:
-        - containerPort: 18332
-          name: rpc
-          protocol: TCP
-        - containerPort: 18333
-          name: p2p
-          protocol: TCP
+        - args:
+            - "-printtoconsole"
+            - "-rpcuser=$(RPCUSER)"
+            - "-rpcpassword=$(RPCPASSWORD)"
+            - "-rpcallowip=10.0.0.0/8"
+            - "-txindex"
+            - "-testnet"
+          env:
+            - name: RPCUSER
+              valueFrom:
+                secretKeyRef:
+                  name: bitcoin-abc-testnet
+                  key: RPCUSER
+            - name: RPCPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bitcoin-abc-testnet
+                  key: RPCPASSWORD
+          image: 4ops/bitcoin-abc:v0.20.1
+          livenessProbe:
+            tcpSocket:
+              port: 18333
+            timeoutSeconds: 1
+          name: bitcoin-abc
+          ports:
+            - containerPort: 18332
+              name: rpc
+              protocol: TCP
+            - containerPort: 18333
+              name: p2p
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 2000m
+              memory: 2Gi
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+          volumeMounts:
+            - mountPath: /home/bitcoin/.bitcoin
+              name: data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
-            cpu: 2000m
-            memory: 2Gi
-          limits:
-            cpu: 2000m
-            memory: 2Gi
-        volumeMounts:
-        - mountPath: /home/bitcoin/.bitcoin
-          name: data
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 50Gi
-      storageClassName: standard
+            storage: 50Gi
+        storageClassName: standard
