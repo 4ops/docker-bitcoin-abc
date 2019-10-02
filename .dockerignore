@@ -1,6 +1,11 @@
-examples
-.dockerignore
+.git
+.gitattributes
+.gitkeep
 .gitignore
-Dockerfile
+
+examples
 LICENSE
 *.md
+
+.dockerignore
+Dockerfile
