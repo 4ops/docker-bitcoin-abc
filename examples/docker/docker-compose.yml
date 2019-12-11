@@ -2,7 +2,7 @@ version: "3"
 
 services:
   testnet:
-    image: 4ops/bitcoin-abc:v0.20.6
+    image: 4ops/bitcoin-abc:v0.20.8
     volumes:
       - ./testnet-data:/home/bitcoin/.bitcoin
     ports:
@@ -17,9 +17,15 @@ services:
       - -txindex
       - -testnet
     restart: always
+    stop_grace_period: 2m
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "10m"
 
   mainnet:
-    image: 4ops/bitcoin-abc:v0.20.6
+    image: 4ops/bitcoin-abc:v0.20.8
     volumes:
       - ./mainnet-data:/home/bitcoin/.bitcoin
     ports:
@@ -33,3 +39,9 @@ services:
       - -onlynet=ipv4
       - -txindex
     restart: always
+    stop_grace_period: 2m
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "10m"
